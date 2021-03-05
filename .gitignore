@@ -30,6 +30,7 @@ local.properties
 *.csv
 *.txt
 *.xml
+*.idea
 
 # External tool builders
 .externalToolBuilders/
