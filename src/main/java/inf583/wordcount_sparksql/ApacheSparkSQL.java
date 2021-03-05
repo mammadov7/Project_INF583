@@ -1,4 +1,5 @@
 package inf583.wordcount_sparksql;
+
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.functions;
 import org.apache.log4j.Level;
@@ -59,15 +60,15 @@ public class ApacheSparkSQL {
 //	spark.sql("SELECT userID, COUNT(movieID) FROM global_temp.ratings GROUP BY userID ORDER BY userID ").show(100, false);
 
 	// Exercise 4
-//	spark.sql("SELECT movieID, SUM(rating)/COUNT(movieID) Average " +
-//					 "FROM global_temp.ratings " +
-//			   		 "GROUP BY movieID ORDER BY movieID").show(100, false);
+	spark.sql("SELECT movieID, SUM(rating)/COUNT(movieID) Average " +
+					 "FROM global_temp.ratings " +
+			   		 "GROUP BY movieID ORDER BY movieID").show(100, false);
 	// For checking
 	// awk 'BEGIN {FS = ","} ; {if($2 == "2"){ sum+=$3; count+=1 }} END {print sum/ count}' ratings.csv
 
 	// Exercise 5
-		spark.sql("SELECT t1.userID, t2.userID " +
-				"FROM global_temp.ratings t1, global_temp.ratings t2 ").show(100, false);
+//		spark.sql("SELECT t1.userID, t2.userID " +
+//				"FROM global_temp.ratings t1, global_temp.ratings t2 ").show(100, false);
 
 
 
