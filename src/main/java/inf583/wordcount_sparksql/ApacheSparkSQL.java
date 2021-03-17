@@ -23,25 +23,70 @@ public class ApacheSparkSQL {
 	SQLContext sqlContext = new SQLContext(spark);
 	
 	// Reading a JSON file
-	Dataset<Row> tweets = spark.read().json("datasets/sampleTweets.txt");
-	// Displays the content of the Dataset to stdout
-//	tweets.show(5);
-	StructType schema = new StructType()
-	.add("userID", "int")
-	.add("movieID", "int")
-	.add("rating", "float")
-	.add("timestamp", "long");
+//	Dataset<Row> data = spark.read().json("datasets/NoFilterEnglish2020-02-04.json");
+	Dataset<Row> stopWords = spark.read().json("datasets/stop_words_english.json");
+	
+	
+//	Dataset<Row> words_filtered = words.filter("words_separated != ''")
+//			   .filter(!functions.array_contains(col("words_separated"), ));
+	
+//	Dataset<Row> eveningWords = data.withColumn("words", functions.split(data.col("text"), " |,")).filter("(timestamp_ms / 1000 / 60 / 60  % 24 )>= 20");//|.|!|:|;|[|]|/|\\?|-
+//	
+//	eveningWords.select("words").show(100);
+	
+	stopWords.show(200);
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	spark.sql("SELECT floor(timestamp_ms / 1000 / 60 / 60 ) % 24 hours "
+//	+ "FROM global_temp.data "
+//	+ "WHERE floor(timestamp_ms / 1000 / 60 / 60 ) % 24 <= 10 "
+//	+ "AND floor(timestamp_ms / 1000 / 60 / 60 ) % 24 >= 5").show(1000, false);	
+	
+//	Dataset<Row> words = tweetsWords.withColumn("words_separated", functions.explode(tweetsWords.col("words"))).select("words_separated");
+//    words.show(5);
+    
+//    Dataset<Row> counts = words.groupBy("words_separated").count();
+//    counts.show(5);
+//    words.createGlobalTempView("words");
+//	spark.sql("SELECT words_separated, count(words_separated) as occurences FROM global_temp.words GROUP BY words.words_separated ORDER BY occurences DESC").show(5);;
+	
+//	
+//	spark.sql("SELECT "
+//			+ "FROM global_temp.data "
+//			+ "WHERE floor(timestamp_ms / 1000 / 60 / 60 ) % 24 <= 10 "
+//			+ "AND floor(timestamp_ms / 1000 / 60 / 60 ) % 24 >= 5").show(1000, false);
+//	
+//	select column, COUNT(column) AS MOST_FREQUENT
+//	from TABLE_NAME
+//	GROUP BY column
+//	ORDER BY COUNT(column) DESC
+//	
+//	StructType schema = new StructType()
+//	.add("userID", "int")
+//	.add("movieID", "int")
+//	.add("rating", "float")
+//	.add("timestamp", "long");
 
 	// Reading a CSV file
-	Dataset<Row> ratings = spark.read().option("header", "true").schema(schema).csv("datasets/ratings.csv");
+//	Dataset<Row> ratings = spark.read().option("header", "true").schema(schema).csv("datasets/ratings.csv");
 	// Displays the content of the Dataset to stdout
 //	ratings.show(5);
-
+	
 
 //	tweets.filter(col("coordinates").isNotNull()).select("coordinates").where(  ).show(5, false);
 
 //	// Select only the "text" column
-//	tweets.select("text").show(5, false);
+
 //
 //    // Select tweets from users that enabled geolocation
 //	tweets.filter(col("place").isNotNull()).select("place").show(5, false);
@@ -55,14 +100,14 @@ public class ApacheSparkSQL {
 //	spark.sql("SELECT COUNT(*) as nb_retweets FROM global_temp.tweets WHERE retweeted_status IS NOT NULL").show();
 //	System.out.println(tweets.filter(col("retweeted_status").isNotNull()).count());
 
-	ratings.createGlobalTempView("ratings");
+//	ratings.createGlobalTempView("ratings");
 	// Exercise 3
 //	spark.sql("SELECT userID, COUNT(movieID) FROM global_temp.ratings GROUP BY userID ORDER BY userID ").show(100, false);
 
 	// Exercise 4
-	spark.sql("SELECT movieID, SUM(rating)/COUNT(movieID) Average " +
-					 "FROM global_temp.ratings " +
-			   		 "GROUP BY movieID ORDER BY movieID").show(100, false);
+//	spark.sql("SELECT movieID, SUM(rating)/COUNT(movieID) Average " +
+//					 "FROM global_temp.ratings " +
+//			   		 "GROUP BY movieID ORDER BY movieID").show(100, false);
 	// For checking
 	// awk 'BEGIN {FS = ","} ; {if($2 == "2"){ sum+=$3; count+=1 }} END {print sum/ count}' ratings.csv
 
