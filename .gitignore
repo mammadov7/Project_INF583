@@ -5,6 +5,8 @@ __pycache__/
 # Ignoring nohup file:
 nohup.out
 
+# Ignoring Parquetted Data:
+Parquets/
 
 # Notebook gitignore template
 .ipynb_checkpoints
